@@ -1,0 +1,27 @@
+{
+   "background_page": "background.html",
+   
+   "browser_action": {
+      "default_icon":  "res/logo.png",
+      "default_title":  "Framed",
+      "default_popup": "popup.html"
+   },
+   "content_scripts": [ {
+      "matches": ["http://*/*"],
+      "js": ["content_script_framed.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }],
+    
+   "description": "Multiple frames within a tab",
+   "icons": {
+      "128": "res/logo.png",
+      "32": "res/logo.png"
+   },
+   "name": "Framed",
+   "options_page": "options.html",
+   "permissions": [ 
+   		"tabs", "http://*/*"
+   	],
+   "version": "1.0"
+}

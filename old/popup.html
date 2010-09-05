@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	</head>
+	<body>
+		<script>
+			/*
+			 *  If the current tab is a 'framed' one,
+			 *   allow the user to save the configuration
+			 *   of the said tab.
+			 */
+			function showSaveCurrentOption(show) {
+				var scid=document.getElementById("save_current");
+				if (show) {
+					scid.style.display="block";
+				} else {
+					scid.style.display="none";
+				}
+			}
+		
+			//var url_rows=chrome.extension.getURL("framed_rows.html");
+			var url_cols=chrome.extension.getURL("framed_columns.html");
+			
+			var current_tab_is_framed=false;
+
+			chrome.tabs.getSelected(null, function(tab) { 
+				if (typeof tab != "undefined") {
+					var current_tab_is_framed=tab.url.search(url_cols)!=-1;
+					showSaveCurrentOption(current_tab_is_framed);
+				}
+			}); 
+						
+			function S4() {
+				return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+			}
+			function guid() {
+				return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+			}			
+			function doNewWithColumns() {
+				var props={"url":url_cols+"?id="+guid()};
+				chrome.tabs.create(props);
+				//doClose();
+			}
+			
+			// Close the popup window
+			function doClose() {
+				window.close();
+			}
+
+			function doSaveCurrent(){
+				chrome.tabs.getSelected(null, function(tab) {
+					//chrome.tabs.executeScript(tab.id, {file: "content_script_framed.js"});
+					chrome.tabs.sendRequest(tab.id, {question:"left_src"});
+					chrome.tabs.sendRequest(tab.id, {question:"right_src"});
+				});
+				
+				//chrome.extension.sendRequest({cmd: "saveCurrent"});
+				//doClose();
+			}
+			
+		</script>
+		<table>
+			<tr><td><img src="res/columns.png" onclick="doNewWithColumns();" ></img></td></tr>
+			<tr><td><hr/></td></tr>
+			<tr><td><button style="display:none" id="save_current" onclick="doSaveCurrent();">Save Current</button></td></tr>
+		</table>
+	</body>
+</html>

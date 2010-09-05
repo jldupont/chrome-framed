@@ -1,21 +1,19 @@
 {
+   "name": "Framed",
+   "version": "1.0",
+   "description": "2 frames within a tab",
+   
    "background_page": "background.html",
    
    "browser_action": {
       "default_icon":  "res/logo.png",
-      "default_title":  "Framed",
-      "default_popup": "popup.html"
+      "default_title":  "Framed"
    },
-   
-   "description": "Multiple frames within a tab",
    "icons": {
       "128": "res/logo.png",
       "32": "res/logo.png"
    },
-   "name": "Framed",
-   "options_page": "options.html",
    "permissions": [ 
-   		"tabs" 
-   	],
-   "version": "1.0"
+   		"tabs"
+   	]
 }

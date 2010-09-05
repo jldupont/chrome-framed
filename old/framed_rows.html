@@ -3,9 +3,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Framed Tab</title>
+	<script>
+		alert(window.document.URL);
+	</script>
 </head>
-<frameset cols="*,*">
-	<frame id="fleft"  src="http://www.google.com/" name="left"></frame>
-	<frame id="fright" src="http://www.google.com/" name="right"></frame>
+<frameset rows="*,*">
+	<frame src="http://www.google.com/" name="left"></frame>
+	<frame src="http://www.google.com/" name="right"></frame>
 </frameset>
 </html>
