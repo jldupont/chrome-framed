@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	</head>
+	<body>
+		<script>
+			function showSaveCurrentOption(show) {
+				var scid=document.getElementById("save_current");
+				if (show) {
+					scid.style.display="block";
+				} else {
+					scid.style.display="none";
+				}
+			}
+		
+			//var url_rows=chrome.extension.getURL("framed_rows.html");
+			var url_cols=chrome.extension.getURL("framed_columns.html");
+			
+			var current_tab_is_framed=false;
+
+			chrome.tabs.getSelected(null, function(tab) { 
+				if (typeof tab != "undefined") {
+					var current_tab_is_framed=tab.url.search(url_cols)!=-1;
+					showSaveCurrentOption(current_tab_is_framed);
+				}
+			}); 			
+			
+			function doNewWithColumns() {
+				var props={"url":url_cols+"?some_option"};
+				chrome.tabs.create(props);
+				doClose();
+			}
+			
+			// Close the popup window
+			function doClose() {
+				window.close();
+			}
+		</script>
+		<table>
+			<tr><td><img src="res/columns.png" onclick="doNewWithColumns();" ></img></td></tr>
+			<tr><td><hr/></td></tr>
+			<tr><td><button style="display:none" id="save_current" onclick="doSaveCurrent();">Save Current</button></td></tr>
+		</table>
+	</body>
+</html>
