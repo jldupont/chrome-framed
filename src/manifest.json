@@ -1,6 +1,6 @@
 {
    "name": "Framed",
-   "version": "1.0",
+   "version": "1.1",
    "description": "2 frames within a tab",
    
    "background_page": "background.html",
@@ -14,6 +14,6 @@
       "32": "res/logo.png"
    },
    "permissions": [ 
-   		"tabs"
+   		"tabs", "bookmarks"
    	]
 }
